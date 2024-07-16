@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1 style="font-size: 30px; text-align:center;">Résultats du quiz</h1><br>
+<p style="text-align: center">Votre score est de :
+    {{ score }}
+    /
+    {{ totalQuestions }}</p><br>
+
+{% for result in results %}
+    <div>
+        <p><strong>{{ result.question }}</strong></p>
+        <ul>
+            {% for response in result.responses %}
+                <li>
+                    {% if response.isSelected %}
+                        {% if response.isCorrect %}
+                            ✔
+                        {% else %}
+                            ❌
+                        {% endif %}
+                    {% endif %}
+                    {{ response.reponse }}
+                    {% if not response.isCorrect and response.isExpected %}
+                        ✔
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+{% endblock %}

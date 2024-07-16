@@ -1,0 +1,19 @@
+<h1>{{ category.name }}</h1>
+
+<form action="{{ path('quiz_submit') }}" method="POST">
+	<input type="hidden" name="category" value="{{ category.id }}">
+
+	{% for question in questions %}
+		<fieldset style="margin-bottom: 20px;">
+			<legend>{{ question.question }}</legend>
+
+			{% for reponse in question.reponses %}
+				<div style="margin-bottom: 10px;">
+					<input type="radio" id="reponse_{{ reponse.id }}" name="{{ question.id }}" value="{{ reponse.id }}" required>
+					<label for="reponse_{{ reponse.id }}">{{ reponse.reponse }}</label>
+				</div>
+			{% endfor %}
+		</fieldset>
+	{% endfor %}
+	<button type="submit">Valider</button>
+</form>
